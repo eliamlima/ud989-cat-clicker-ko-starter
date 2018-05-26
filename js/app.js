@@ -1,4 +1,4 @@
-var viewModel = function() {
+var Cat = function(){
   this.clickCount = ko.observable(0);
   this.title = ko.observable('Tabby');
   this.imgSrc = ko.observable('img/434164568_fea0ad4013_z.jpg');
@@ -10,10 +10,6 @@ var viewModel = function() {
     {name: 'Angry', imgSrc: 'img/4154543904_6e2428c421_z.jpg'}
   ]);
 
-  this.incrementCounter = function() {
-    this.clickCount(this.clickCount() + 1);
-  };
-
   this.level = ko.computed(function() {
     if (this.clickCount() < 10) {
       return 'Newborn';
@@ -23,6 +19,14 @@ var viewModel = function() {
       return 'Teen';
     }
   }, this);
+}
+
+var viewModel = function() {
+  this.currentCat = ko.observable(new Cat());
+
+  this.incrementCounter = function() {
+    this.clickCount(this.clickCount() + 1);
+  };
 }
 
 ko.applyBindings(new viewModel());
